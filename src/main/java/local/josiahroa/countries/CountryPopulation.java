@@ -22,13 +22,13 @@ public class CountryPopulation {
 
     @GetMapping(value = "/min", produces = {"application/json"})
     public ResponseEntity<?> getSmallestCountryByPopulation(){
-        Country smallestCountry = CountriesApplication.countries.findMin();
+        Country smallestCountry = CountriesApplication.countries.findMinPopulation();
         return new ResponseEntity<>(smallestCountry, HttpStatus.OK);
     }
 
     @GetMapping(value = "/max", produces = {"application/json"})
     public ResponseEntity<?> getLargestCountryByPopulation(){
-        Country largestCountry = CountriesApplication.countries.findMax();
+        Country largestCountry = CountriesApplication.countries.findMaxPopulation();
         return new ResponseEntity<>(largestCountry, HttpStatus.OK);
     }
 }

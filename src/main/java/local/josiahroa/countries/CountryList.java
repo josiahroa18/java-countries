@@ -1,6 +1,7 @@
 package local.josiahroa.countries;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CountryList {
@@ -230,13 +231,23 @@ public class CountryList {
         return tempCountryList;
     }
 
-    public Country findMin(){
+    public Country findMinPopulation(){
         countryList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
         return countryList.get(0);
     }
 
-    public Country findMax(){
+    public Country findMaxPopulation(){
         countryList.sort((c1, c2) -> (int)(c2.getPopulation() - c1.getPopulation()));
+        return countryList.get(0);
+    }
+
+    public Country findMinMedianAge(){
+        countryList.sort(Comparator.comparingInt(Country::getMedianAge));
+        return countryList.get(0);
+    }
+
+    public Country findMaxMediaAge(){
+        countryList.sort(Comparator.comparing(Country::getMedianAge, Comparator.reverseOrder()));
         return countryList.get(0);
     }
 }
