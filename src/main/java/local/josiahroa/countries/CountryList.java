@@ -229,4 +229,14 @@ public class CountryList {
         }
         return tempCountryList;
     }
+
+    public Country findMin(){
+        countryList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
+        return countryList.get(0);
+    }
+
+    public Country findMax(){
+        countryList.sort((c1, c2) -> (int)(c2.getPopulation() - c1.getPopulation()));
+        return countryList.get(0);
+    }
 }

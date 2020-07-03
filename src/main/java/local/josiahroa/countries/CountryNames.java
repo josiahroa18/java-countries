@@ -16,18 +16,19 @@ public class CountryNames {
 
     @GetMapping(value="/all", produces = {"application/json"})
     public ResponseEntity<?> getAllCountries(){
-        CountriesApplication.countries.countryList.sort(Comparator.comparing(country -> country.getName()));
+        CountriesApplication.countries.countryList.sort(Comparator.comparing(Country::getName));
         return new ResponseEntity<>(CountriesApplication.countries.countryList, HttpStatus.OK);
     }
 
-    @GetMapping(value="/start/{startingLetter}")
+    @GetMapping(value = "/start/{startingLetter}", produces = {"application/json"})
     public ResponseEntity<?> getCountriesThatStartWith(@PathVariable char startingLetter){
         List<Country> foundCountries = CountriesApplication.countries
-                .getCountries(country -> country.getName().toUpperCase().charAt(0) == Character.toUpperCase(startingLetter));
+                .getCountries(country ->
+                        country.getName().toUpperCase().charAt(0) == Character.toUpperCase(startingLetter));
         return new ResponseEntity<>(foundCountries, HttpStatus.OK);
     }
 
-    @GetMapping(value="/size/{nameLength}")
+    @GetMapping(value = "/size/{nameLength}", produces = {"application/json"})
     public ResponseEntity<?> getCountriesWithNameLength(@PathVariable int nameLength){
         List<Country> foundCountries = CountriesApplication.countries
                 .getCountries(country -> country.getName().length() >= nameLength);
